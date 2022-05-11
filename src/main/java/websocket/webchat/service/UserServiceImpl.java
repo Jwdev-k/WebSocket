@@ -12,8 +12,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public void save(User user) { // INSERT INTO
+        userRepository.save(user);
+    }
+
     @Override
-    public int login(User user) {
+    public int login(User user) { // SELECT * FROM
         User test = userRepository.findByUid(user.getUid());
         if (test != null && test.getPassword().equals(user.getPassword())) {
             log.debug(test.getUid() + "님이 로그인.");
