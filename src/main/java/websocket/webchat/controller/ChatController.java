@@ -1,31 +1,32 @@
 package websocket.webchat.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import websocket.webchat.dto.ChatMessage;
 import websocket.webchat.dto.ChatRoom;
 import websocket.webchat.service.ChatService;
 
 import java.util.List;
 
-@RestController
+
 @RequiredArgsConstructor
-@RequestMapping("/api/chat")
+@Controller
 public class ChatController {
         private final ChatService chatService;
 
-        @PostMapping
-        public ChatRoom createRoom(@RequestParam String name) {
-            return chatService.createRoom(name);
+        @RequestMapping(value = "/chat", method = RequestMethod.GET)
+        public String roomList(){
+            return "chatList";
         }
 
-        @GetMapping
+        @GetMapping("/api/chat")
+        @ResponseBody
         public List<ChatRoom> findAllRoom() {
             return chatService.findAllRoom();
+        }
+        @PostMapping("/api/chat")
+        @ResponseBody
+        public ChatRoom createRoom(@RequestParam String name) {
+            return chatService.createRoom(name);
         }
 }

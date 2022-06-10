@@ -12,10 +12,9 @@ import websocket.webchat.handler.WebChatHandler;
 public class WebSocketConfig implements WebSocketConfigurer {
     @Autowired
     private WebChatHandler webChatHandler;
-
-
+    
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(webChatHandler, "/chat").setAllowedOrigins("*");
+        registry.addHandler(webChatHandler, "/chatroom").setAllowedOrigins("*");
     }
 }

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
     User findByUid (String uid);
     ArrayList<User> findAllBy();
 }
