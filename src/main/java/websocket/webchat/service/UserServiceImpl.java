@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import websocket.webchat.dto.User;
 import websocket.webchat.repository.UserRepository;
 
+import javax.annotation.PostConstruct;
+
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {

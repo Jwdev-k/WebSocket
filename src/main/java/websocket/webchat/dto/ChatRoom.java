@@ -24,9 +24,13 @@ public class ChatRoom {
     public void handleActions(WebSocketSession session, ChatMessage chatMessage, ChatService chatService) {
         if (chatMessage.getType().equals(MessageType.JOIN)) {
             sessions.add(session);
-            chatMessage.setMessage("[알림] " + chatMessage.getSender() + "님이 입장했습니다.");
+            chatMessage.setMessage(chatMessage.getSender() + "님이 입장했습니다.");
+            chatMessage.setSender("[알림]");
         }
-        sendMessage(chatMessage, chatService);
+        if(chatMessage.getType().equals(MessageType.LEAVE)) {
+            sessions.remove(session);
+        }
+        sendMessage(chatMessage.getSender() + ": " + chatMessage.getMessage(), chatService);
     }
 
     public <T> void sendMessage(T message, ChatService chatService) {
